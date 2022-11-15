@@ -3,7 +3,9 @@ using CleanArchitecture.Infrastructure.Persistence;
 using CleanArchitecture.WebUI.Filters;
 using CleanArchitecture.WebUI.Services;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Models;
 //using NSwag;
 //using NSwag.Generation.Processors.Security;
 
@@ -49,9 +51,75 @@ public static class ConfigureServices
         services.AddControllers();
 
         services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen(c =>
+        //services.AddSwaggerGen(c =>
+        //{
+        //    c.SwaggerDoc("v1", 
+        //        new OpenApi.Models.OpenApiInfo {
+        //            Title = "CleanArchitecture",
+        //            Version = "v1"
+        //        });
+        //    c.AddSecurityDefinition("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
+        //    {
+        //        Type = SecuritySchemeType.ApiKey,
+        //        Name = "Authorization",
+        //        In = ParameterLocation.Header,
+        //        Description = "Type into the textbox: Bearer {your JWT token}."
+        //   });
+        //});
+
+        //services.AddSwaggerGen(c =>
+        //{
+        //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "BasicAuth", Version = "v1" });
+        //    c.AddSecurityDefinition("basic", new OpenApiSecurityScheme
+        //    {
+        //        Name = "Authorization",
+        //        Type = SecuritySchemeType.Http,
+        //        Scheme = "basic",
+        //        In = ParameterLocation.Header,
+        //        Description = "Basic Authorization header using the Bearer scheme."
+        //    });
+        //    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+        //        {
+        //            {
+        //                  new OpenApiSecurityScheme
+        //                    {
+        //                        Reference = new OpenApiReference
+        //                        {
+        //                            Type = ReferenceType.SecurityScheme,
+        //                            Id = "basic"
+        //                        }
+        //                    },
+        //                    new string[] {}
+        //            }
+        //        });
+        //});
+
+        services.AddSwaggerGen(setup =>
         {
-            c.SwaggerDoc("v1", new OpenApi.Models.OpenApiInfo { Title = "CleanArchitecture", Version= "v1" });
+            // Include 'SecurityScheme' to use JWT Authentication
+            var jwtSecurityScheme = new OpenApiSecurityScheme
+            {
+                BearerFormat = "JWT",
+                Name = "JWT Authentication",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.Http,
+                Scheme = JwtBearerDefaults.AuthenticationScheme,
+                Description = "Put **_ONLY_** your JWT Bearer token on textbox below!",
+
+                Reference = new OpenApiReference
+                {
+                    Id = JwtBearerDefaults.AuthenticationScheme,
+                    Type = ReferenceType.SecurityScheme
+                }
+            };
+
+            setup.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
+
+            setup.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        { jwtSecurityScheme, Array.Empty<string>() }
+    });
+
         });
 
         //if (app.Environment.IsDevelopment())

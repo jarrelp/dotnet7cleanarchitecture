@@ -57,7 +57,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-//app.MapRazorPages();
+app.MapRazorPages();
 
 //app.MapFallbackToFile("index.html");
 
