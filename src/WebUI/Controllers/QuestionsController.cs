@@ -12,9 +12,15 @@ namespace CleanArchitecture.WebUI.Controllers;
 public class QuestionsController : ApiControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult<TodosVm>> Get()
+    public async Task<ActionResult<List<QuestionDto>>> Get()
     {
         return await Mediator.Send(new GetQuestionsQuery());
+    }
+
+    [HttpGet("prioritylevels")]
+    public async Task<ActionResult<List<PriorityLevelDto>>> GetPriorityLevels()
+    {
+        return await Mediator.Send(new GetPriorityLevelsQuery());
     }
 
     [HttpGet("{id}")]

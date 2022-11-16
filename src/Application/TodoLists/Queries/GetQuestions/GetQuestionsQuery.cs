@@ -9,32 +9,24 @@ using Microsoft.EntityFrameworkCore;
 namespace CleanArchitecture.Application.TodoLists.Queries.GetQuestions;
 
 //[Authorize]
-public record GetQuestionsQuery : IRequest<TodosVm>;
+public record GetQuestionsQuery : IRequest<List<QuestionDto>>;
 
-public class GetTodosQueryHandler : IRequestHandler<GetQuestionsQuery, TodosVm>
+public class GetQuestionsQueryHandler : IRequestHandler<GetQuestionsQuery, List<QuestionDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetTodosQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetQuestionsQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public async Task<TodosVm> Handle(GetQuestionsQuery request, CancellationToken cancellationToken)
+    public async Task<List<QuestionDto>> Handle(GetQuestionsQuery request, CancellationToken cancellationToken)
     {
-        return new TodosVm
-        {
-            PriorityLevels = Enum.GetValues(typeof(PriorityLevel))
-                .Cast<PriorityLevel>()
-                .Select(p => new PriorityLevelDto { Value = (int)p, Name = p.ToString() })
-                .ToList(),
-
-            Questions = await _context.Questions
+        return await _context.Questions
                 .AsNoTracking()
                 .ProjectTo<QuestionDto>(_mapper.ConfigurationProvider)
-                .ToListAsync(cancellationToken)
-        };
+                .ToListAsync(cancellationToken);
     }
 }

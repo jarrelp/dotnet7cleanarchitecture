@@ -38,7 +38,7 @@ public class OptionsController : ApiControllerBase
     }
 
     [HttpPut("[action]")]
-    public async Task<ActionResult> UpdateItemDetails(int id, UpdateOptionDetailCommand command)
+    public async Task<ActionResult> UpdateOptionDetails(int id, UpdateOptionDetailCommand command)
     {
         if (id != command.Id)
         {
