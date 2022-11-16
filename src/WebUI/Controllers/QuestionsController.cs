@@ -20,7 +20,7 @@ public class QuestionsController : ApiControllerBase
     [HttpGet("{id}")]
     public async Task<FileResult> Get(int id)
     {
-        var vm = await Mediator.Send(new ExportTodosQuery { ListId = id });
+        var vm = await Mediator.Send(new ExportTodosQuery { QuestionId = id });
 
         return File(vm.Content, vm.ContentType, vm.FileName);
     }
