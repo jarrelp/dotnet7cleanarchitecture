@@ -6,5 +6,5 @@ public class Question : BaseAuditableEntity
 
     public Colour Colour { get; set; } = Colour.White;
 
-    public IList<Option> Options { get; private set; } = new List<Option>();
+    public IList<Option>? Options { get; private set; }
 }

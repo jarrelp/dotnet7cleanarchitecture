@@ -9,6 +9,8 @@ public record CreateOptionCommand : IRequest<int>
 {
     public int QuestionId { get; init; }
 
+    public IList<int>? SkillIds { get; set; }
+
     public string? Description { get; init; }
 }
 
@@ -23,10 +25,17 @@ public class CreateOptionCommandHandler : IRequestHandler<CreateOptionCommand, i
 
     public async Task<int> Handle(CreateOptionCommand request, CancellationToken cancellationToken)
     {
+        IList<Skill>? skillList = new List<Skill>();
+        foreach(var item in request.SkillIds)
+        {
+            skillList.Add(await _context.Skills.FindAsync(new object[] { item }, cancellationToken));
+        }
+        
         var entity = new Option
         {
             QuestionId = request.QuestionId,
-            Description = request.Description
+            Description = request.Description,
+            Skills = skillList
         };
 
         entity.AddDomainEvent(new OptionCreatedEvent(entity));

@@ -9,5 +9,7 @@ public interface IApplicationDbContext
 
     DbSet<Option> Options { get; }
 
+    DbSet<Skill> Skills { get; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

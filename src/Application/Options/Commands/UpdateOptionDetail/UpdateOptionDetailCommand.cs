@@ -12,6 +12,8 @@ public record UpdateOptionDetailCommand : IRequest
 
     public int QuestionId { get; init; }
 
+    public IList<int>? SkillIds { get; init; }
+
     public PriorityLevel Priority { get; init; }
 
     public string? Description { get; init; }
@@ -37,6 +39,7 @@ public class UpdateOptionDetailCommandHandler : IRequestHandler<UpdateOptionDeta
         }
 
         entity.QuestionId = request.QuestionId;
+        entity.SkillIds = request.SkillIds;
         entity.Priority = request.Priority;
         entity.Description = request.Description;
 

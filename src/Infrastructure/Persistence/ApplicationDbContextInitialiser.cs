@@ -78,10 +78,42 @@ public class ApplicationDbContextInitialiser
                 Description = "Question",
                 Options =
                 {
-                    new Option { Description = "option 1: 📃" },
-                    new Option { Description = "option 2: ✅" },
-                    new Option { Description = "option 3: 🤯"},
-                    new Option { Description = "option 4: 🏆" },
+                    new Option
+                    {
+                        Description = "option 1: 📃",
+                        Skills =
+                        {
+                            new Skill { Name = "skill 1" },
+                            new Skill { Name = "skill 2" },
+                        }
+                    },
+                    new Option
+                    {
+                        Description = "option 2: ✅",
+                        Skills =
+                        {
+                            new Skill { Name = "skill 3" },
+                            new Skill { Name = "skill 4" },
+                        }
+                    },
+                    new Option
+                    {
+                        Description = "option 3: 🤯",
+                        Skills =
+                        {
+                            new Skill { Name = "skill 5" },
+                            new Skill { Name = "skill 6" },
+                        }
+                    },
+                    new Option
+                    {
+                        Description = "option 4: 🏆",
+                        Skills =
+                        {
+                            new Skill { Name = "skill 7" },
+                            new Skill { Name = "skill 8" },
+                        }
+                    }
                 }
             });
 
