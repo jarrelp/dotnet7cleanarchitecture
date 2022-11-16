@@ -9,4 +9,6 @@ public class Option : BaseAuditableEntity
     public PriorityLevel Priority { get; set; }
 
     public Question Question { get; set; } = null!;
+
+    public IList<Skill> Skills { get; private set; } = new List<Skill>();
 }

@@ -1,6 +1,7 @@
 ﻿using CleanArchitecture.Application.Common.Exceptions;
 using CleanArchitecture.Application.Common.Interfaces;
 using CleanArchitecture.Domain.Entities;
+using CleanArchitecture.Domain.Events;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,6 +30,8 @@ public class DeleteQuestionCommandHandler : IRequestHandler<DeleteQuestionComman
         }
 
         _context.Questions.Remove(entity);
+
+        entity.AddDomainEvent(new QuestionDeletedEvent(entity));
 
         await _context.SaveChangesAsync(cancellationToken);
 

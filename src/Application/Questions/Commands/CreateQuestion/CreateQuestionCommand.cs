@@ -1,5 +1,6 @@
 ﻿using CleanArchitecture.Application.Common.Interfaces;
 using CleanArchitecture.Domain.Entities;
+using CleanArchitecture.Domain.Events;
 using MediatR;
 
 namespace CleanArchitecture.Application.Questions.Commands.CreateQuestion;
@@ -23,6 +24,8 @@ public class CreateQuestionCommandHandler : IRequestHandler<CreateQuestionComman
         var entity = new Question();
 
         entity.Description = request.Description;
+
+        entity.AddDomainEvent(new QuestionCreatedEvent(entity));
 
         _context.Questions.Add(entity);
 
