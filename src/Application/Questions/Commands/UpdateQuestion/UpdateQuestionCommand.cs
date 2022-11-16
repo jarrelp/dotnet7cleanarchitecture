@@ -3,7 +3,7 @@ using CleanArchitecture.Application.Common.Interfaces;
 using CleanArchitecture.Domain.Entities;
 using MediatR;
 
-namespace CleanArchitecture.Application.TodoLists.Commands.UpdateQuestion;
+namespace CleanArchitecture.Application.Questions.Commands.UpdateQuestion;
 
 public record UpdateQuestionCommand : IRequest
 {

@@ -2,7 +2,7 @@
 using CleanArchitecture.Application.Common.Mappings;
 using CleanArchitecture.Domain.Entities;
 
-namespace CleanArchitecture.Application.TodoLists.Queries.GetQuestions;
+namespace CleanArchitecture.Application.Questions.Queries.GetQuestions;
 
 public class OptionDto : IMapFrom<Option>
 {

@@ -1,4 +1,4 @@
-﻿namespace CleanArchitecture.Application.TodoLists.Queries.GetQuestions;
+﻿namespace CleanArchitecture.Application.Questions.Queries.GetQuestions;
 
 public class TodosVm
 {

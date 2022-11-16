@@ -2,7 +2,7 @@
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
-namespace CleanArchitecture.Application.TodoLists.Commands.CreateQuestion;
+namespace CleanArchitecture.Application.Questions.Commands.CreateQuestion;
 
 public class CreateQuestionCommandValidator : AbstractValidator<CreateQuestionCommand>
 {

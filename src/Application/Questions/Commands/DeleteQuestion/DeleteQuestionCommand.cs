@@ -4,7 +4,7 @@ using CleanArchitecture.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace CleanArchitecture.Application.TodoLists.Commands.DeleteQuestion;
+namespace CleanArchitecture.Application.Questions.Commands.DeleteQuestion;
 
 public record DeleteQuestionCommand(int Id) : IRequest;
 

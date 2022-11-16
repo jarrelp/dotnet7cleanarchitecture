@@ -6,7 +6,7 @@ using CleanArchitecture.Domain.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace CleanArchitecture.Application.TodoLists.Queries.GetQuestions;
+namespace CleanArchitecture.Application.Questions.Queries.GetQuestions;
 
 //[Authorize]
 public record GetQuestionsQuery : IRequest<List<QuestionDto>>;

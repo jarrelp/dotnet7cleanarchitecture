@@ -2,7 +2,7 @@
 using CleanArchitecture.Application.Common.Security;
 using MediatR;
 
-namespace CleanArchitecture.Application.TodoLists.Commands.PurgeQuestions;
+namespace CleanArchitecture.Application.Questions.Commands.PurgeQuestions;
 
 //[Authorize(Roles = "Administrator")]
 //[Authorize(Policy = "CanPurge")]

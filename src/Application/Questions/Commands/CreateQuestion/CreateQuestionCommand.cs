@@ -2,7 +2,7 @@
 using CleanArchitecture.Domain.Entities;
 using MediatR;
 
-namespace CleanArchitecture.Application.TodoLists.Commands.CreateQuestion;
+namespace CleanArchitecture.Application.Questions.Commands.CreateQuestion;
 
 public record CreateQuestionCommand : IRequest<int>
 {
