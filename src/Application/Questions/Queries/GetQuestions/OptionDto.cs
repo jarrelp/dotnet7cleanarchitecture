@@ -16,7 +16,7 @@ public class OptionDto : IMapFrom<Option>
 
     public void Mapping(Profile profile)
     {
-        profile.CreateMap<Option, OptionDto>()
-            .ForMember(d => d.Priority, opt => opt.MapFrom(s => (int)s.Priority));
+        /*profile.CreateMap<Option, OptionDto>()
+            .ForMember(d => d.Priority, opt => opt.MapFrom(s => (int)s.Priority));*/
     }
 }

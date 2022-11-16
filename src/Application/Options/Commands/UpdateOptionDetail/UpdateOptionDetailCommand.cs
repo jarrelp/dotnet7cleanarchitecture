@@ -1,5 +1,6 @@
 ﻿using CleanArchitecture.Application.Common.Exceptions;
 using CleanArchitecture.Application.Common.Interfaces;
+using CleanArchitecture.Application.Options.Commands.CreateOption;
 using CleanArchitecture.Domain.Entities;
 using CleanArchitecture.Domain.Enums;
 using MediatR;
@@ -12,9 +13,7 @@ public record UpdateOptionDetailCommand : IRequest
 
     public int QuestionId { get; init; }
 
-    public IList<int>? SkillIds { get; init; }
-
-    public PriorityLevel Priority { get; init; }
+    public IList<CreateOptionSkillDto>? OptionSkills { get; set; }
 
     public string? Description { get; init; }
 }
@@ -38,9 +37,18 @@ public class UpdateOptionDetailCommandHandler : IRequestHandler<UpdateOptionDeta
             throw new NotFoundException(nameof(Option), request.Id);
         }
 
+        IList<OptionSkill>? skillList = new List<OptionSkill>();
+        foreach (var item in request.OptionSkills)
+        {
+            OptionSkill optionSkill = new OptionSkill();
+            optionSkill.Priority = (PriorityLevel)item.PriorityLevel;
+            optionSkill.OptionId = entity.Id;
+            optionSkill.SkillId = item.SkillId;
+        }
+
+        entity.OptionSkills = skillList;
+
         entity.QuestionId = request.QuestionId;
-        entity.SkillIds = request.SkillIds;
-        entity.Priority = request.Priority;
         entity.Description = request.Description;
 
         await _context.SaveChangesAsync(cancellationToken);

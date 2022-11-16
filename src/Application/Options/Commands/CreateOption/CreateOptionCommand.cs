@@ -1,5 +1,6 @@
 ﻿using CleanArchitecture.Application.Common.Interfaces;
 using CleanArchitecture.Domain.Entities;
+using CleanArchitecture.Domain.Enums;
 using CleanArchitecture.Domain.Events;
 using MediatR;
 
@@ -9,7 +10,7 @@ public record CreateOptionCommand : IRequest<int>
 {
     public int QuestionId { get; init; }
 
-    public IList<int>? SkillIds { get; set; }
+    public IList<CreateOptionSkillDto>? OptionSkills { get; set; }
 
     public string? Description { get; init; }
 }
@@ -25,18 +26,22 @@ public class CreateOptionCommandHandler : IRequestHandler<CreateOptionCommand, i
 
     public async Task<int> Handle(CreateOptionCommand request, CancellationToken cancellationToken)
     {
-        IList<Skill>? skillList = new List<Skill>();
-        foreach(var item in request.SkillIds)
-        {
-            skillList.Add(await _context.Skills.FindAsync(new object[] { item }, cancellationToken));
-        }
-        
         var entity = new Option
         {
             QuestionId = request.QuestionId,
             Description = request.Description,
-            Skills = skillList
         };
+
+        IList<OptionSkill>? skillList = new List<OptionSkill>();
+        foreach (var item in request.OptionSkills)
+        {
+            OptionSkill optionSkill = new OptionSkill();
+            optionSkill.Priority = (PriorityLevel)item.PriorityLevel;
+            optionSkill.OptionId = entity.Id;
+            optionSkill.SkillId = item.SkillId;
+        }
+
+        entity.OptionSkills = skillList;
 
         entity.AddDomainEvent(new OptionCreatedEvent(entity));
 
