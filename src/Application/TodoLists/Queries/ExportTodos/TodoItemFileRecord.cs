@@ -3,9 +3,7 @@ using CleanArchitecture.Domain.Entities;
 
 namespace CleanArchitecture.Application.TodoLists.Queries.ExportTodos;
 
-public class TodoItemRecord : IMapFrom<TodoItem>
+public class TodoItemRecord : IMapFrom<Option>
 {
-    public string? Title { get; set; }
-
-    public bool Done { get; set; }
+    public string? Description { get; set; }
 }

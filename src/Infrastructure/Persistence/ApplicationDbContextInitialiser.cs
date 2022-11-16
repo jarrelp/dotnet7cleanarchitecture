@@ -61,27 +61,27 @@ public class ApplicationDbContextInitialiser
         }
 
         // Default users
-        var administrator = new ApplicationUser { UserName = "administrator@localhost", Email = "administrator@localhost" };
+        var administrator = new ApplicationUser { UserName = "admin@localhost", Email = "admin@localhost" };
 
         if (_userManager.Users.All(u => u.UserName != administrator.UserName))
         {
-            await _userManager.CreateAsync(administrator, "Administrator1!");
+            await _userManager.CreateAsync(administrator, "Admin1!");
             await _userManager.AddToRolesAsync(administrator, new [] { administratorRole.Name });
         }
 
         // Default data
         // Seed, if necessary
-        if (!_context.TodoLists.Any())
+        if (!_context.Questions.Any())
         {
-            _context.TodoLists.Add(new TodoList
+            _context.Questions.Add(new Question
             {
-                Title = "Todo List",
-                Items =
+                Description = "Question",
+                Options =
                 {
-                    new TodoItem { Title = "Make a todo list 📃" },
-                    new TodoItem { Title = "Check off the first item ✅" },
-                    new TodoItem { Title = "Realise you've already done two things on the list! 🤯"},
-                    new TodoItem { Title = "Reward yourself with a nice, long nap 🏆" },
+                    new Option { Description = "option 1: 📃" },
+                    new Option { Description = "option 2: ✅" },
+                    new Option { Description = "option 3: 🤯"},
+                    new Option { Description = "option 4: 🏆" },
                 }
             });
 
