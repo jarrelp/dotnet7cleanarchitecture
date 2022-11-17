@@ -1,4 +1,5 @@
 ﻿using CleanArchitecture.Domain.Entities;
+using CleanArchitecture.Domain.Enums;
 using CleanArchitecture.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -73,6 +74,17 @@ public class ApplicationDbContextInitialiser
         // Seed, if necessary
         if (!_context.Questions.Any())
         {
+            var s1 = new Skill { Name = "Skill 1" };
+            var s2 = new Skill { Name = "Skill 2" };
+            var s3 = new Skill { Name = "Skill 3" };
+            var s4 = new Skill { Name = "Skill 4" };
+            var s5 = new Skill { Name = "Skill 5" };
+            var s6 = new Skill { Name = "Skill 6" };
+            var s7 = new Skill { Name = "Skill 7" };
+            var s8 = new Skill { Name = "Skill 8" };
+
+            _context.Skills.AddRange(s1, s2, s3, s4, s5, s6, s7, s8);
+
             _context.Questions.Add(new Question
             {
                 Description = "Question",
@@ -81,37 +93,52 @@ public class ApplicationDbContextInitialiser
                     new Option
                     {
                         Description = "option 1: 📃",
-                        Skills =
+                        OptionSkills =
                         {
-                            new Skill { Name = "skill 1" },
-                            new Skill { Name = "skill 2" },
+                            new OptionSkill
+                            {
+                                Skill = s1,
+                                Priority = PriorityLevel.Low
+                            },
+                            new OptionSkill
+                            {
+                                Skill = s2,
+                                Priority = PriorityLevel.Medium
+                            },
                         }
                     },
                     new Option
                     {
                         Description = "option 2: ✅",
-                        Skills =
+                        OptionSkills =
                         {
-                            new Skill { Name = "skill 3" },
-                            new Skill { Name = "skill 4" },
+                            new OptionSkill
+                            {
+                                Skill = s1,
+                                Priority = PriorityLevel.Low
+                            },
+                            new OptionSkill
+                            {
+                                Skill = s2,
+                                Priority = PriorityLevel.Medium
+                            },
                         }
                     },
                     new Option
                     {
                         Description = "option 3: 🤯",
-                        Skills =
+                        OptionSkills =
                         {
-                            new Skill { Name = "skill 5" },
-                            new Skill { Name = "skill 6" },
-                        }
-                    },
-                    new Option
-                    {
-                        Description = "option 4: 🏆",
-                        Skills =
-                        {
-                            new Skill { Name = "skill 7" },
-                            new Skill { Name = "skill 8" },
+                            new OptionSkill
+                            {
+                                Skill = s1,
+                                Priority = PriorityLevel.Low
+                            },
+                            new OptionSkill
+                            {
+                                Skill = s2,
+                                Priority = PriorityLevel.Medium
+                            },
                         }
                     }
                 }

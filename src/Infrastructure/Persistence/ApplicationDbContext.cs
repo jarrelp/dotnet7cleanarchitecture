@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Reflection.Emit;
 using CleanArchitecture.Application.Common.Interfaces;
 using CleanArchitecture.Domain.Entities;
 using CleanArchitecture.Infrastructure.Identity;
@@ -32,6 +33,8 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, 
     public DbSet<Option> Options => Set<Option>();
 
     public DbSet<Skill> Skills => Set<Skill>();
+
+    public DbSet<OptionSkill> OptionSkills => Set<OptionSkill>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

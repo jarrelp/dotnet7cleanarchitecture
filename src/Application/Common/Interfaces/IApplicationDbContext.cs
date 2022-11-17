@@ -11,5 +11,7 @@ public interface IApplicationDbContext
 
     DbSet<Skill> Skills { get; }
 
+    DbSet<OptionSkill> OptionSkills { get; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

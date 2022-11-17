@@ -32,16 +32,20 @@ public class CreateOptionCommandHandler : IRequestHandler<CreateOptionCommand, i
             Description = request.Description,
         };
 
-        IList<OptionSkill>? skillList = new List<OptionSkill>();
-        foreach (var item in request.OptionSkills)
+        if (request.OptionSkills != null)
         {
-            OptionSkill optionSkill = new OptionSkill();
-            optionSkill.Priority = (PriorityLevel)item.PriorityLevel;
-            optionSkill.OptionId = entity.Id;
-            optionSkill.SkillId = item.SkillId;
-        }
+            IList<OptionSkill> skillList = new List<OptionSkill>();
+            foreach (var item in request.OptionSkills)
+            {
+                OptionSkill optionSkill = new OptionSkill();
+                optionSkill.Priority = (PriorityLevel)item.PriorityLevel;
+                optionSkill.OptionId = entity.Id;
+                optionSkill.SkillId = item.SkillId;
+                skillList.Add(optionSkill);
+            }
 
-        entity.OptionSkills = skillList;
+            entity.OptionSkills = skillList;
+        }
 
         entity.AddDomainEvent(new OptionCreatedEvent(entity));
 

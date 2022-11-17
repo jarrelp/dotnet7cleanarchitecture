@@ -37,16 +37,20 @@ public class UpdateOptionDetailCommandHandler : IRequestHandler<UpdateOptionDeta
             throw new NotFoundException(nameof(Option), request.Id);
         }
 
-        IList<OptionSkill>? skillList = new List<OptionSkill>();
-        foreach (var item in request.OptionSkills)
+        if (request.OptionSkills != null)
         {
-            OptionSkill optionSkill = new OptionSkill();
-            optionSkill.Priority = (PriorityLevel)item.PriorityLevel;
-            optionSkill.OptionId = entity.Id;
-            optionSkill.SkillId = item.SkillId;
-        }
+            IList<OptionSkill> skillList = new List<OptionSkill>();
+            foreach (var item in request.OptionSkills)
+            {
+                OptionSkill optionSkill = new OptionSkill();
+                optionSkill.Priority = (PriorityLevel)item.PriorityLevel;
+                optionSkill.OptionId = entity.Id;
+                optionSkill.SkillId = item.SkillId;
+                skillList.Add(optionSkill);
+            }
 
-        entity.OptionSkills = skillList;
+            entity.OptionSkills = skillList;
+        }
 
         entity.QuestionId = request.QuestionId;
         entity.Description = request.Description;

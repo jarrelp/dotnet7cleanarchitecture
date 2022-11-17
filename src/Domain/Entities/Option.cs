@@ -7,6 +7,5 @@ public class Option : BaseAuditableEntity
     public int QuestionId { get; set; }
     public Question Question { get; set; } = null!;
 
-    public IList<Skill>? Skills { get; private set; }
     public IList<OptionSkill>? OptionSkills { get; set; }
 }
