@@ -37,6 +37,8 @@ public class UpdateOptionDetailCommandHandler : IRequestHandler<UpdateOptionDeta
             throw new NotFoundException(nameof(Option), request.Id);
         }
 
+        _context.OptionSkills.RemoveRange(_context.OptionSkills.Where(x => x.OptionId == request.Id));
+
         if (request.OptionSkills != null)
         {
             IList<OptionSkill> skillList = new List<OptionSkill>();

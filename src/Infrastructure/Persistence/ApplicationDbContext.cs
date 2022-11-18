@@ -40,6 +40,19 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, 
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
+        //many to many
+        /*builder.Entity<OptionSkill>().HasKey(os => new { os.OptionId, os.SkillId });
+
+        builder.Entity<OptionSkill>()
+                    .HasOne(t => t.Option)
+                    .WithMany(t => t.OptionSkills)
+                    .HasForeignKey(t => t.OptionId);
+
+        builder.Entity<OptionSkill>()
+                    .HasOne(t => t.Skill)
+                    .WithMany(t => t.OptionSkills)
+                    .HasForeignKey(t => t.SkillId);*/
+
         base.OnModelCreating(builder);
     }
 

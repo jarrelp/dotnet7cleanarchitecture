@@ -9,7 +9,7 @@ public class OptionBriefDto : IMapFrom<Option>
 
     public int QuestionId { get; set; }
 
-    public IList<int>? SkillIds { get; set; }
+    public IList<OptionSkill>? OptionSkills { get; set; }
 
     public string? Description { get; set; }
 }
