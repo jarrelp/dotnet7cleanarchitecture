@@ -27,6 +27,8 @@ public class DeleteOptionCommandHandler : IRequestHandler<DeleteOptionCommand>
             throw new NotFoundException(nameof(Option), request.Id);
         }
 
+        _context.OptionSkills.RemoveRange(_context.OptionSkills.Where(x => x.OptionId == request.Id));
+
         _context.Options.Remove(entity);
 
         entity.AddDomainEvent(new OptionDeletedEvent(entity));
