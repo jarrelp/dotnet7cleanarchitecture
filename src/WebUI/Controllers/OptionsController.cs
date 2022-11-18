@@ -13,7 +13,7 @@ namespace CleanArchitecture.WebUI.Controllers;
 public class OptionsController : ApiControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult<PaginatedList<OptionBriefDto>>> GetTodoItemsWithPagination([FromQuery] GetOptionsWithPaginationQuery query)
+    public async Task<ActionResult<PaginatedList<OptionBriefDto>>> GetOptionsWithPagination([FromQuery] GetOptionsWithPaginationQuery query)
     {
         return await Mediator.Send(query);
     }
