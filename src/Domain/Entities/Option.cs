@@ -1,6 +1,6 @@
 ﻿namespace CleanArchitecture.Domain.Entities;
 
-public class Option : BaseAuditableEntity
+public class Option  : BaseAuditableEntity
 {
     public string? Description { get; set; }
 

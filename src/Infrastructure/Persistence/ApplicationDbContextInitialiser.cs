@@ -1,4 +1,5 @@
-﻿using CleanArchitecture.Domain.Entities;
+﻿using System.Diagnostics;
+using CleanArchitecture.Domain.Entities;
 using CleanArchitecture.Domain.Enums;
 using CleanArchitecture.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
@@ -53,6 +54,12 @@ public class ApplicationDbContextInitialiser
 
     public async Task TrySeedAsync()
     {
+        // department
+        var d1 = new Department { Name = "Department 1" };
+        var d2 = new Department { Name = "Department 2" };
+
+        _context.Departments.AddRange(d1, d2);
+
         // Default roles
         var administratorRole = new IdentityRole("Administrator");
 
@@ -62,7 +69,7 @@ public class ApplicationDbContextInitialiser
         }
 
         // Default users
-        var administrator = new ApplicationUser { UserName = "admin@localhost", Email = "admin@localhost" };
+        var administrator = new ApplicationUser { UserName = "admin@localhost", Email = "admin@localhost", Department = d1 };
 
         if (_userManager.Users.All(u => u.UserName != administrator.UserName))
         {
@@ -74,6 +81,7 @@ public class ApplicationDbContextInitialiser
         // Seed, if necessary
         if (!_context.Questions.Any())
         {
+            //skill
             var s1 = new Skill { Name = "Skill 1" };
             var s2 = new Skill { Name = "Skill 2" };
             var s3 = new Skill { Name = "Skill 3" };
@@ -83,6 +91,7 @@ public class ApplicationDbContextInitialiser
 
             _context.Skills.AddRange(s1, s2, s3, s4, s5, s6);
 
+            //optionskill
             var os1 = new OptionSkill
             {
                 SkillId = 1,
@@ -114,118 +123,19 @@ public class ApplicationDbContextInitialiser
                 Priority = PriorityLevel.Medium
             };
 
+            //option
             var o1 = new Option { Description = "option 1: 📃", OptionSkills = new List<OptionSkill>(){ os1, os2 } };
             var o2 = new Option { Description = "option 2: ✅", OptionSkills = new List<OptionSkill>() { os3, os4 } };
             var o3 = new Option { Description = "option 3: 🤯", OptionSkills = new List<OptionSkill>() { os5, os6 } };
-            IList<Option> options = new List<Option>();
-            options.Add(o1);
-            options.Add(o2);
-            options.Add(o3);
+            var options = new List<Option>() { o1, o2, o3};
 
             _context.Options.AddRange(o1, o2, o3);
 
-            /*var os1 = new OptionSkill
-            {
-                SkillId = 1,
-                OptionId = 1,
-                Priority = PriorityLevel.Low
-            };
-            var os2 = new OptionSkill
-            {
-                SkillId = 2,
-                OptionId = 1,
-                Priority = PriorityLevel.Medium
-            };
-            var os3 = new OptionSkill
-            {
-                SkillId = 3,
-                OptionId = 2,
-                Priority = PriorityLevel.Low
-            };
-            var os4 = new OptionSkill
-            {
-                SkillId = 4,
-                OptionId = 2,
-                Priority = PriorityLevel.Medium
-            };
-            var os5 = new OptionSkill
-            {
-                SkillId = 5,
-                OptionId = 3,
-                Priority = PriorityLevel.Low
-            };
-            var os6 = new OptionSkill
-            {
-                SkillId = 6,
-                OptionId = 3,
-                Priority = PriorityLevel.Medium
-            };
-
-            _context.OptionSkills.AddRange(os1, os2, os3);*/
-
+            //question
             _context.Questions.Add(new Question
             {
                 Description = "Question",
                 Options = options
-                /*{
-                    new Option
-                    {
-                        Description = "option 1: 📃"*//*,
-                        OptionSkills =
-                        {
-                            new OptionSkill
-                            {
-                                SkillId = 1,
-                                OptionId = 1,
-                                Priority = PriorityLevel.Low
-                            },
-                            new OptionSkill
-                            {
-                                SkillId = 2,
-                                OptionId = 1,
-                                Priority = PriorityLevel.Medium
-                            },
-                        }*//*
-                    },
-                    new Option
-                    {
-                        Description = "option 2: ✅"*//*,
-                        OptionSkills =
-                        {
-                            new OptionSkill
-                            {
-                                SkillId = 3,
-                                OptionId = 2,
-                                Priority = PriorityLevel.Low
-                            },
-                            new OptionSkill
-                            {
-                                SkillId = 4,
-                                OptionId = 2,
-                                Priority = PriorityLevel.Medium
-                            },
-                        }*//*
-                    },
-                    new Option
-                    {
-                        Description = "option 3: 🤯"*//*,
-                        OptionSkills =
-                        {
-                            new OptionSkill
-                            {
-                                SkillId = 5,
-                                OptionId = 3,
-                                Priority = PriorityLevel.Low
-                            },
-                            new OptionSkill
-                            {
-                                SkillId = 6,
-                                OptionId = 3,
-                                Priority = PriorityLevel.Medium
-                            },
-                        }*//*
-                    }
-                }*/
             });
 
             await _context.SaveChangesAsync();
