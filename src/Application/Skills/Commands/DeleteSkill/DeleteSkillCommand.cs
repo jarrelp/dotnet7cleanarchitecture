@@ -1,7 +1,7 @@
 ﻿using CleanArchitecture.Application.Common.Exceptions;
 using CleanArchitecture.Application.Common.Interfaces;
 using CleanArchitecture.Domain.Entities;
-using CleanArchitecture.Domain.Events;
+using CleanArchitecture.Domain.Events.Skill;
 using MediatR;
 
 namespace CleanArchitecture.Application.Skills.Commands.DeleteSkill;

@@ -1,4 +1,4 @@
-﻿using CleanArchitecture.Domain.Events;
+﻿using CleanArchitecture.Domain.Events.Skill;
 using MediatR;
 using Microsoft.Extensions.Logging;
 

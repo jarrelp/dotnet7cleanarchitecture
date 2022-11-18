@@ -36,6 +36,8 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, 
 
     public DbSet<OptionSkill> OptionSkills => Set<OptionSkill>();
 
+    public DbSet<Department> Departments => Set<Department>();
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
