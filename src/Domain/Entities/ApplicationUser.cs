@@ -1,10 +1,11 @@
-﻿using CleanArchitecture.Domain.Entities;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
-namespace CleanArchitecture.Infrastructure.Identity;
+namespace CleanArchitecture.Domain.Entities;
 
 public class ApplicationUser : IdentityUser
 {
     public int DepartmentId { get; set; }
     public Department Department { get; set; }
+
+    IList<Result>? Results { get; set; }
 }

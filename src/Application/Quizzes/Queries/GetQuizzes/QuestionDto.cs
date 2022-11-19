@@ -8,6 +8,4 @@ public class QuestionDto : IMapFrom<Question>
     public int Id { get; set; }
 
     public string? Description { get; set; }
-
-    public string? Colour { get; set; }
 }

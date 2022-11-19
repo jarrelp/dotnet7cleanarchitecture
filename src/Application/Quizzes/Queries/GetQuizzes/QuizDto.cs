@@ -14,7 +14,5 @@ public class QuizDto : IMapFrom<Quiz>
 
     public string? Description { get; set; }
 
-    public string? Colour { get; set; }
-
     public IList<QuestionDto> Questions { get; set; }
 }

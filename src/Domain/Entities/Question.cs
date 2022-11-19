@@ -4,7 +4,8 @@ public class Question : BaseAuditableEntity
 {
     public string? Description { get; set; }
 
-    public Colour Colour { get; set; } = Colour.White;
+    public int QuizId { get; set; }
+    public Quiz Quiz { get; set; } = null!;
 
     public IList<Option>? Options { get; set; }
 }

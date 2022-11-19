@@ -14,7 +14,5 @@ public class QuestionDto : IMapFrom<Question>
 
     public string? Description { get; set; }
 
-    public string? Colour { get; set; }
-
     public IList<OptionDto> Options { get; set; }
 }
