@@ -2,9 +2,9 @@
 
 public class ResultDeletedEvent : BaseEvent
 {
-    public ResultDeletedEvent(Entities.Result Result)
+    public ResultDeletedEvent(Entities.Result result)
     {
-        Result = Result;
+        Result = result;
     }
 
     public Entities.Result Result { get; }

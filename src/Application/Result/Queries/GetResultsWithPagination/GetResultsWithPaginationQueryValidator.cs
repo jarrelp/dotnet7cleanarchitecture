@@ -6,7 +6,7 @@ public class GetResultsWithPaginationQueryValidator : AbstractValidator<GetResul
 {
     public GetResultsWithPaginationQueryValidator()
     {
-        RuleFor(x => x.QuestionId)
+        RuleFor(x => x.ResultId)
             .NotEmpty().WithMessage("QuestionId is required.");
 
         RuleFor(x => x.PageNumber)

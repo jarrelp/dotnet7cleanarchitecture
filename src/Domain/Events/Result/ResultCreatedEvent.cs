@@ -2,9 +2,9 @@
 
 public class ResultCreatedEvent : BaseEvent
 {
-    public ResultCreatedEvent(Entities.Result Result)
+    public ResultCreatedEvent(Entities.Result result)
     {
-        Result = Result;
+        Result = result;
     }
 
     public Entities.Result Result { get; }

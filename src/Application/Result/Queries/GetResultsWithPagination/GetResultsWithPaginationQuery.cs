@@ -9,7 +9,7 @@ namespace CleanArchitecture.Application.Results.Queries.GetResultsWithPagination
 
 public record GetResultsWithPaginationQuery : IRequest<PaginatedList<ResultBriefDto>>
 {
-    public int QuestionId { get; init; }
+    public int ResultId { get; init; }
     public int PageNumber { get; init; } = 1;
     public int PageSize { get; init; } = 10;
 }
@@ -27,9 +27,10 @@ public class GetResultsWithPaginationQueryHandler : IRequestHandler<GetResultsWi
 
     public async Task<PaginatedList<ResultBriefDto>> Handle(GetResultsWithPaginationQuery request, CancellationToken cancellationToken)
     {
-        return await _context.Options
-            .Where(x => x.QuestionId == request.QuestionId)
-            .OrderBy(x => x.Description)
+        return await _context.Results
+            .Where(x => x.ResultId == request.ResultId)
+            .OrderBy(x => x.ResultId)
+            .Select(x => x.Options)
             .ProjectTo<ResultBriefDto>(_mapper.ConfigurationProvider)
             .PaginatedListAsync(request.PageNumber, request.PageSize);
     }
