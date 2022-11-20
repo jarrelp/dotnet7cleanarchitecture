@@ -12,7 +12,7 @@ public record CreateOptionCommand : IRequest<int>
 
     public IList<CreateOptionSkillDto>? OptionSkills { get; set; }
 
-    public string? Description { get; init; }
+    public string Description { get; init; } = null!;
 }
 
 public class CreateOptionCommandHandler : IRequestHandler<CreateOptionCommand, int>
@@ -38,7 +38,7 @@ public class CreateOptionCommandHandler : IRequestHandler<CreateOptionCommand, i
             foreach (var item in request.OptionSkills)
             {
                 OptionSkill optionSkill = new OptionSkill();
-                optionSkill.Priority = (PriorityLevel)item.PriorityLevel;
+                optionSkill.SkillLevel = (SkillLevel)item.SkillLevel;
                 optionSkill.OptionId = entity.Id;
                 optionSkill.SkillId = item.SkillId;
                 skillList.Add(optionSkill);

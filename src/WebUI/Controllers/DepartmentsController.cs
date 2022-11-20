@@ -1,5 +1,5 @@
 ﻿using CleanArchitecture.Application.Common.Models;
-using CleanArchitecture.Application.Departments.Queries.GetDepartments;
+using CleanArchitecture.Application.Departments.Queries.GetDepartmentsWithPagination;
 using CleanArchitecture.Application.Departments.Commands.CreateDepartment;
 using CleanArchitecture.Application.Departments.Commands.DeleteDepartment;
 using CleanArchitecture.Application.Departments.Commands.UpdateDepartment;
@@ -7,15 +7,15 @@ using CleanArchitecture.Application.Departments.Commands.PurgeDepartments;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CleanArchitecture.WebUI.Controllers;
+namespace CleanArchitecture.API.Controllers;
 
 //[Authorize]
 public class DepartmentsController : ApiControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult<List<DepartmentDto>>> Get()
+    public async Task<ActionResult<PaginatedList<DepartmentDto>>> GetDepartmentsWithPagination([FromQuery] GetDepartmentsWithPaginationQuery query)
     {
-        return await Mediator.Send(new GetDepartmentsQuery());
+        return await Mediator.Send(query);
     }
 
     [HttpPost]

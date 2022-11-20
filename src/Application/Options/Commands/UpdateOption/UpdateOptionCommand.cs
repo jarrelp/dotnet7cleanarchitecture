@@ -9,7 +9,7 @@ public record UpdateOptionCommand : IRequest
 {
     public int Id { get; init; }
 
-    public string? Description { get; init; }
+    public string Description { get; init; } = null!;
 }
 
 public class UpdateOptionCommandHandler : IRequestHandler<UpdateOptionCommand>

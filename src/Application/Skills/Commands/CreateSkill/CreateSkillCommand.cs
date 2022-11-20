@@ -7,7 +7,7 @@ namespace CleanArchitecture.Application.Skills.Commands.CreateSkill;
 
 public record CreateSkillCommand : IRequest<int>
 {
-    public string? Name { get; init; }
+    public string Name { get; init; } = null!;
 }
 
 public class CreateSkillCommandHandler : IRequestHandler<CreateSkillCommand, int>

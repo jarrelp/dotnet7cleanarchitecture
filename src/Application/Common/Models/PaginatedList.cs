@@ -17,6 +17,8 @@ public class PaginatedList<T>
         Items = items;
     }
 
+    public PaginatedList() { }
+
     public bool HasPreviousPage => PageNumber > 1;
 
     public bool HasNextPage => PageNumber < TotalPages;

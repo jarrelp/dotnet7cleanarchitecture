@@ -11,8 +11,5 @@ public class QuestionConfiguration : IEntityTypeConfiguration<Question>
         builder.Property(t => t.Description)
             .HasMaxLength(200)
             .IsRequired();
-
-        builder
-            .OwnsOne(b => b.Colour);
     }
 }

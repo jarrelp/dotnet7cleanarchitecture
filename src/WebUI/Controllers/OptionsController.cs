@@ -3,17 +3,24 @@ using CleanArchitecture.Application.Options.Commands.CreateOption;
 using CleanArchitecture.Application.Options.Commands.DeleteOption;
 using CleanArchitecture.Application.Options.Commands.UpdateOption;
 using CleanArchitecture.Application.Options.Commands.UpdateOptionDetail;
+using CleanArchitecture.Application.Options.Queries.GetOptionDetailsWithPagination;
 using CleanArchitecture.Application.Options.Queries.GetOptionsWithPagination;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CleanArchitecture.WebUI.Controllers;
+namespace CleanArchitecture.API.Controllers;
 
 //[Authorize]
 public class OptionsController : ApiControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult<PaginatedList<OptionBriefDto>>> GetTodoItemsWithPagination([FromQuery] GetOptionsWithPaginationQuery query)
+    public async Task<ActionResult<PaginatedList<OptionDto>>> GetOptionsWithPagination([FromQuery] GetOptionsWithPaginationQuery query)
+    {
+        return await Mediator.Send(query);
+    }
+
+    [HttpGet("details")]
+    public async Task<ActionResult<PaginatedList<OptionDetailDto>>> GetOptionDetailsWithPagination([FromQuery] GetOptionDetailsWithPaginationQuery query)
     {
         return await Mediator.Send(query);
     }

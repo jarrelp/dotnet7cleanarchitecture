@@ -3,5 +3,5 @@
 public class CreateOptionSkillDto
 {
     public int SkillId { get; set; }
-    public int PriorityLevel { get; set; }
+    public int SkillLevel { get; set; }
 }

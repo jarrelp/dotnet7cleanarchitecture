@@ -7,7 +7,8 @@ namespace CleanArchitecture.Application.Questions.Commands.CreateQuestion;
 
 public record CreateQuestionCommand : IRequest<int>
 {
-    public string? Description { get; init; }
+    public int QuizId { get; set; }
+    public string Description { get; init; } = null!;
 }
 
 public class CreateQuestionCommandHandler : IRequestHandler<CreateQuestionCommand, int>
@@ -23,6 +24,7 @@ public class CreateQuestionCommandHandler : IRequestHandler<CreateQuestionComman
     {
         var entity = new Question();
 
+        entity.QuizId = request.QuizId;
         entity.Description = request.Description;
 
         entity.AddDomainEvent(new QuestionCreatedEvent(entity));

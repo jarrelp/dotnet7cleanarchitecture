@@ -9,7 +9,7 @@ public record UpdateDepartmentCommand : IRequest
 {
     public int Id { get; init; }
 
-    public string? Name { get; init; }
+    public string Name { get; init; } = null!;
 }
 
 public class UpdateDepartmentCommandHandler : IRequestHandler<UpdateDepartmentCommand>
