@@ -7,7 +7,7 @@ namespace CleanArchitecture.Application.Questions.Commands.CreateQuestion;
 
 public record CreateQuestionCommand : IRequest<int>
 {
-    public string? Description { get; init; }
+    public string Description { get; init; } = null!;
 }
 
 public class CreateQuestionCommandHandler : IRequestHandler<CreateQuestionCommand, int>

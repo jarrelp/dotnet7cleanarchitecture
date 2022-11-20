@@ -1,7 +1,7 @@
 ﻿using CleanArchitecture.Application.Common.Mappings;
 using CleanArchitecture.Domain.Entities;
 
-namespace CleanArchitecture.Application.Quizzes.Queries.GetQuizzes;
+namespace CleanArchitecture.Application.Common.Models;
 
 public class QuizDto : IMapFrom<Quiz>
 {
@@ -12,7 +12,9 @@ public class QuizDto : IMapFrom<Quiz>
 
     public int Id { get; set; }
 
-    public string? Description { get; set; }
+    public string Description { get; set; } = null!;
+
+    public bool Active { get; set; }
 
     public IList<QuestionDto> Questions { get; set; }
 }

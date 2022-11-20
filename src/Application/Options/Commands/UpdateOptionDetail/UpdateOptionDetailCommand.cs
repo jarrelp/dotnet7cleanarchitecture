@@ -11,9 +11,9 @@ public record UpdateOptionDetailCommand : IRequest
 {
     public int Id { get; init; }
 
-    public int QuestionId { get; init; }
+    public int? QuestionId { get; init; }
 
-    public IList<CreateOptionSkillDto>? OptionSkills { get; set; }
+    public IList<CreateOptionSkillDto>? OptionSkills { get; init; }
 
     public string? Description { get; init; }
 }
@@ -45,7 +45,7 @@ public class UpdateOptionDetailCommandHandler : IRequestHandler<UpdateOptionDeta
             foreach (var item in request.OptionSkills)
             {
                 OptionSkill optionSkill = new OptionSkill();
-                optionSkill.Priority = (PriorityLevel)item.PriorityLevel;
+                optionSkill.SkillLevel = (SkillLevel)item.SkillLevel;
                 optionSkill.OptionId = entity.Id;
                 optionSkill.SkillId = item.SkillId;
                 skillList.Add(optionSkill);
@@ -54,8 +54,11 @@ public class UpdateOptionDetailCommandHandler : IRequestHandler<UpdateOptionDeta
             entity.OptionSkills = skillList;
         }
 
-        entity.QuestionId = request.QuestionId;
-        entity.Description = request.Description;
+        if (request.QuestionId != null)
+            entity.QuestionId = request.QuestionId.Value;
+
+        if (request.Description != null)
+            entity.Description = request.Description;
 
         await _context.SaveChangesAsync(cancellationToken);
 

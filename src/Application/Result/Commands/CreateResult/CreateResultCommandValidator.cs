@@ -7,6 +7,7 @@ public class CreateResultCommandValidator : AbstractValidator<CreateResultComman
     public CreateResultCommandValidator()
     {
         RuleFor(v => v.Options)
+            .NotNull()
             .NotEmpty();
     }
 }

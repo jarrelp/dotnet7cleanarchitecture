@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace CleanArchitecture.Application.Results.Queries.GetResultsWithPagination;
+namespace CleanArchitecture.Application.Quizzes.Queries.GetQuizzesWithPagination;
 
-public class GetResultsWithPaginationQueryValidator : AbstractValidator<GetResultsWithPaginationQuery>
+public class GetQuizzesWithPaginationQueryValidator : AbstractValidator<GetQuizzesWithPaginationQuery>
 {
-    public GetResultsWithPaginationQueryValidator()
+    public GetQuizzesWithPaginationQueryValidator()
     {
         RuleFor(x => x.PageNumber)
             .GreaterThanOrEqualTo(1).WithMessage("PageNumber at least greater than or equal to 1.");

@@ -5,9 +5,9 @@ using CleanArchitecture.Application.Common.Mappings;
 using CleanArchitecture.Application.Common.Models;
 using MediatR;
 
-namespace CleanArchitecture.Application.Options.Queries.GetOptionsWithPagination;
+namespace CleanArchitecture.Application.Options.Queries.GetOptionDetailsWithPagination;
 
-public record GetOptionsWithPaginationQuery : IRequest<PaginatedList<OptionDto>>
+public record GetOptionDetailsWithPaginationQuery : IRequest<PaginatedList<OptionDetailDto>>
 {
     public int? OptionId { get; init; }
     public int? QuestionId { get; init; }
@@ -15,23 +15,23 @@ public record GetOptionsWithPaginationQuery : IRequest<PaginatedList<OptionDto>>
     public int PageSize { get; init; } = 10;
 }
 
-public class GetOptionsWithPaginationQueryHandler : IRequestHandler<GetOptionsWithPaginationQuery, PaginatedList<OptionDto>>
+public class GetOptionDetailsWithPaginationQueryHandler : IRequestHandler<GetOptionDetailsWithPaginationQuery, PaginatedList<OptionDetailDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetOptionsWithPaginationQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetOptionDetailsWithPaginationQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public async Task<PaginatedList<OptionDto>> Handle(GetOptionsWithPaginationQuery request, CancellationToken cancellationToken)
+    public async Task<PaginatedList<OptionDetailDto>> Handle(GetOptionDetailsWithPaginationQuery request, CancellationToken cancellationToken)
     {
         return await _context.Options
             .Where(x => x.Id == request.OptionId || x.QuestionId == request.QuestionId)
             .OrderBy(x => x.Description)
-            .ProjectTo<OptionDto>(_mapper.ConfigurationProvider)
+            .ProjectTo<OptionDetailDto>(_mapper.ConfigurationProvider)
             .PaginatedListAsync(request.PageNumber, request.PageSize);
     }
 }

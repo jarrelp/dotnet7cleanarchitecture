@@ -7,7 +7,7 @@ namespace CleanArchitecture.Application.Results.Commands.CreateResult;
 
 public record CreateResultCommand : IRequest<int>
 {
-    public IList<Option>? Options { get; init; }
+    public IList<Option> Options { get; init; } = null!;
 }
 
 public class CreateResultCommandHandler : IRequestHandler<CreateResultCommand, int>

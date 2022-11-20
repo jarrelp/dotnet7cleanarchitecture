@@ -7,7 +7,7 @@ namespace CleanArchitecture.Application.Departments.Commands.CreateDepartment;
 
 public record CreateDepartmentCommand : IRequest<int>
 {
-    public string? Name { get; init; }
+    public string Name { get; init; } = null!;
 }
 
 public class CreateDepartmentCommandHandler : IRequestHandler<CreateDepartmentCommand, int>

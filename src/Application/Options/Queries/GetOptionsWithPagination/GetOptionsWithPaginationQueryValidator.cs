@@ -6,9 +6,6 @@ public class GetOptionsWithPaginationQueryValidator : AbstractValidator<GetOptio
 {
     public GetOptionsWithPaginationQueryValidator()
     {
-        RuleFor(x => x.QuestionId)
-            .NotEmpty().WithMessage("QuestionId is required.");
-
         RuleFor(x => x.PageNumber)
             .GreaterThanOrEqualTo(1).WithMessage("PageNumber at least greater than or equal to 1.");
 

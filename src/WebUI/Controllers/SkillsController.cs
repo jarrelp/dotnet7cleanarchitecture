@@ -1,5 +1,5 @@
 ﻿using CleanArchitecture.Application.Common.Models;
-using CleanArchitecture.Application.Skills.Queries.GetSkills;
+using CleanArchitecture.Application.Skills.Queries.GetSkillsWithPagination;
 using CleanArchitecture.Application.Skills.Commands.CreateSkill;
 using CleanArchitecture.Application.Skills.Commands.DeleteSkill;
 using CleanArchitecture.Application.Skills.Commands.UpdateSkill;
@@ -13,9 +13,9 @@ namespace CleanArchitecture.WebUI.Controllers;
 public class SkillsController : ApiControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult<List<SkillDto>>> Get()
+    public async Task<ActionResult<PaginatedList<SkillDto>>> GetSkillsWithPagination([FromQuery] GetSkillsWithPaginationQuery query)
     {
-        return await Mediator.Send(new GetSkillsQuery());
+        return await Mediator.Send(query);
     }
 
     [HttpPost]

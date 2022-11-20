@@ -95,32 +95,32 @@ public class ApplicationDbContextInitialiser
             var os1 = new OptionSkill
             {
                 SkillId = 1,
-                Priority = PriorityLevel.Low
+                SkillLevel = SkillLevel.Low
             };
             var os2 = new OptionSkill
             {
                 SkillId = 2,
-                Priority = PriorityLevel.Medium
+                SkillLevel = SkillLevel.Medium
             };
             var os3 = new OptionSkill
             {
                 SkillId = 3,
-                Priority = PriorityLevel.Low
+                SkillLevel = SkillLevel.Low
             };
             var os4 = new OptionSkill
             {
                 SkillId = 4,
-                Priority = PriorityLevel.Medium
+                SkillLevel = SkillLevel.Medium
             };
             var os5 = new OptionSkill
             {
                 SkillId = 5,
-                Priority = PriorityLevel.Low
+                SkillLevel = SkillLevel.Low
             };
             var os6 = new OptionSkill
             {
                 SkillId = 6,
-                Priority = PriorityLevel.Medium
+                SkillLevel = SkillLevel.Medium
             };
 
             //option

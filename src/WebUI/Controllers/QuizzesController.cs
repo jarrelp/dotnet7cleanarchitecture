@@ -2,9 +2,10 @@
 using CleanArchitecture.Application.Quizzes.Commands.DeleteQuiz;
 using CleanArchitecture.Application.Quizzes.Commands.UpdateQuiz;
 using CleanArchitecture.Application.Quizzes.Commands.PurgeQuizzes;
-using CleanArchitecture.Application.Quizzes.Queries.GetQuizzes;
+using CleanArchitecture.Application.Quizzes.Queries.GetQuizzesWithPagination;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using CleanArchitecture.Application.Common.Models;
 
 namespace CleanArchitecture.WebUI.Controllers;
 
@@ -12,9 +13,9 @@ namespace CleanArchitecture.WebUI.Controllers;
 public class QuizzesController : ApiControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult<List<QuizDto>>> Get()
+    public async Task<ActionResult<PaginatedList<QuizDto>>> GetQuizzesWithPagination([FromQuery] GetQuizzesWithPaginationQuery query)
     {
-        return await Mediator.Send(new GetQuizzesQuery());
+        return await Mediator.Send(query);
     }
 
     [HttpPost]

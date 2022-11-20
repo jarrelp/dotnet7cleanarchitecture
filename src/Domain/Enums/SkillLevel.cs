@@ -1,6 +1,6 @@
 ﻿namespace CleanArchitecture.Domain.Enums;
 
-public enum PriorityLevel
+public enum SkillLevel
 {
     None = 0,
     Low = 1,

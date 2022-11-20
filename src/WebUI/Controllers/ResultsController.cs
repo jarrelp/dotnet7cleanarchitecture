@@ -12,7 +12,7 @@ namespace CleanArchitecture.WebUI.Controllers;
 public class ResultsController : ApiControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult<PaginatedList<ResultBriefDto>>> GetResultsWithPagination([FromQuery] GetResultsWithPaginationQuery query)
+    public async Task<ActionResult<PaginatedList<ResultDto>>> GetResultsWithPagination([FromQuery] GetResultsWithPaginationQuery query)
     {
         return await Mediator.Send(query);
     }

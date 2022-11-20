@@ -7,7 +7,7 @@ namespace CleanArchitecture.Application.Quizzes.Commands.CreateQuiz;
 
 public record CreateQuizCommand : IRequest<int>
 {
-    public string? Description { get; init; }
+    public string Description { get; init; } = null!;
 }
 
 public class CreateQuizCommandHandler : IRequestHandler<CreateQuizCommand, int>

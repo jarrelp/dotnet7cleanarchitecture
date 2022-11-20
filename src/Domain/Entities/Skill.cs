@@ -2,7 +2,7 @@
 
 public class Skill : BaseAuditableEntity
 {
-    public string? Name { get; set; }
+    public string Name { get; set; } = null!;
 
-    public IList<OptionSkill>? OptionSkills { get; set; }
+    public IList<OptionSkill> OptionSkills { get; set; } = new List<OptionSkill>();
 }

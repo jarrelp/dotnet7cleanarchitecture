@@ -2,9 +2,11 @@
 using CleanArchitecture.Application.Questions.Commands.DeleteQuestion;
 using CleanArchitecture.Application.Questions.Commands.UpdateQuestion;
 using CleanArchitecture.Application.Questions.Commands.PurgeQuestions;
-using CleanArchitecture.Application.Questions.Queries.GetQuestions;
+using CleanArchitecture.Application.Questions.Queries.GetQuestionsWithPagination;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using CleanArchitecture.Application.SkillLevels.Queries.GetSkillLevels;
+using CleanArchitecture.Application.Common.Models;
 
 namespace CleanArchitecture.WebUI.Controllers;
 
@@ -12,15 +14,15 @@ namespace CleanArchitecture.WebUI.Controllers;
 public class QuestionsController : ApiControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult<List<QuestionDto>>> Get()
+    public async Task<ActionResult<PaginatedList<QuestionDto>>> GetQuestionsWithPagination([FromQuery] GetQuestionsWithPaginationQuery query)
     {
-        return await Mediator.Send(new GetQuestionsQuery());
+        return await Mediator.Send(query);
     }
 
-    [HttpGet("prioritylevels")]
-    public async Task<ActionResult<List<PriorityLevelDto>>> GetPriorityLevels()
+    [HttpGet("skilllevels")]
+    public async Task<ActionResult<List<SkillLevelDto>>> GetSkillLevels()
     {
-        return await Mediator.Send(new GetPriorityLevelsQuery());
+        return await Mediator.Send(new GetSkillLevelsQuery());
     }
 
     [HttpPost]
