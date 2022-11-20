@@ -1,4 +1,5 @@
-﻿using CleanArchitecture.Application.Common.Interfaces;
+﻿using CleanArchitecture.Application.Common.CustomValidators;
+using CleanArchitecture.Application.Common.Interfaces;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,8 +14,9 @@ public class UpdateSkillCommandValidator : AbstractValidator<UpdateSkillCommand>
         _context = context;
 
         RuleFor(v => v.Name)
-            .NotNull().WithMessage("Name is required.")
-            .NotEmpty().WithMessage("Name is required.")
+            .NotNullOrEmpty()
+            .NotStartWithWhiteSpace()
+            .NotEndWithWhiteSpace()
             .MaximumLength(200).WithMessage("Name must not exceed 200 characters.")
             .MustAsync(BeUniqueName).WithMessage("The specified Name already exists.");
     }

@@ -1,4 +1,5 @@
-﻿using CleanArchitecture.Application.Common.Interfaces;
+﻿using CleanArchitecture.Application.Common.CustomValidators;
+using CleanArchitecture.Application.Common.Interfaces;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,9 @@ public class UpdateOptionDetailCommandValidator : AbstractValidator<UpdateOption
         _context = context;
 
         RuleFor(v => v.Description)
+            .NotNullOrEmpty()
+            .NotStartWithWhiteSpace()
+            .NotEndWithWhiteSpace()
             .MaximumLength(200).WithMessage("Description must not exceed 200 characters.")
             .MustAsync(BeUniqueDescription).WithMessage("The specified description already exists.");
     }

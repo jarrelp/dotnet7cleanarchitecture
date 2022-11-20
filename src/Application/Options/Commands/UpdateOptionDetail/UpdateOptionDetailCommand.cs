@@ -11,8 +11,6 @@ public record UpdateOptionDetailCommand : IRequest
 {
     public int Id { get; init; }
 
-    public int? QuestionId { get; init; }
-
     public IList<CreateOptionSkillDto>? OptionSkills { get; init; }
 
     public string? Description { get; init; }
@@ -53,9 +51,6 @@ public class UpdateOptionDetailCommandHandler : IRequestHandler<UpdateOptionDeta
 
             entity.OptionSkills = skillList;
         }
-
-        if (request.QuestionId != null)
-            entity.QuestionId = request.QuestionId.Value;
 
         if (request.Description != null)
             entity.Description = request.Description;

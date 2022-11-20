@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using CleanArchitecture.Application.Common.CustomValidators;
+using FluentValidation;
 
 namespace CleanArchitecture.Application.Departments.Commands.CreateDepartment;
 
@@ -7,8 +8,9 @@ public class CreateDepartmentCommandValidator : AbstractValidator<CreateDepartme
     public CreateDepartmentCommandValidator()
     {
         RuleFor(v => v.Name)
-            .MaximumLength(50)
-            .NotNull().WithMessage("Name is required.")
-            .NotEmpty().WithMessage("Name is required.");
+            .NotNullOrEmpty()
+            .NotStartWithWhiteSpace()
+            .NotEndWithWhiteSpace()
+            .MaximumLength(50);
     }
 }

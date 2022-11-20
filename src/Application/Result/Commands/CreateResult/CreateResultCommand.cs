@@ -7,6 +7,10 @@ namespace CleanArchitecture.Application.Results.Commands.CreateResult;
 
 public record CreateResultCommand : IRequest<int>
 {
+    public int QuizId { get; set; }
+
+    public string ApplicationUserId { get; set; } = null!;
+
     public IList<Option> Options { get; init; } = null!;
 }
 
@@ -23,6 +27,8 @@ public class CreateResultCommandHandler : IRequestHandler<CreateResultCommand, i
     {
         var entity = new Result
         {
+            QuizId = request.QuizId,
+            ApplicationUserId = request.ApplicationUserId,
             Options = request.Options
         };
 
