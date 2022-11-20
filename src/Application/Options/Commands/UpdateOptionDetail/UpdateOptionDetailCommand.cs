@@ -50,6 +50,8 @@ public class UpdateOptionDetailCommandHandler : IRequestHandler<UpdateOptionDeta
             }
 
             entity.OptionSkills = skillList;
+            
+            // hier moet ie pas gevalideert worden
         }
 
         if (request.Description != null)
