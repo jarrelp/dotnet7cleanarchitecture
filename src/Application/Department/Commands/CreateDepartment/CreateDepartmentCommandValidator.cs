@@ -8,6 +8,7 @@ public class CreateDepartmentCommandValidator : AbstractValidator<CreateDepartme
     {
         RuleFor(v => v.Name)
             .MaximumLength(50)
-            .NotEmpty();
+            .NotNull().WithMessage("Name is required.")
+            .NotEmpty().WithMessage("Name is required.");
     }
 }

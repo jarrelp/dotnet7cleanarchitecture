@@ -13,6 +13,7 @@ public class CreateQuestionCommandValidator : AbstractValidator<CreateQuestionCo
         _context = context;
 
         RuleFor(v => v.Description)
+            .NotNull().WithMessage("Description is required.")
             .NotEmpty().WithMessage("Description is required.")
             .MaximumLength(200).WithMessage("Description must not exceed 200 characters.")
             .MustAsync(BeUniqueDescription).WithMessage("The specified description already exists.");
