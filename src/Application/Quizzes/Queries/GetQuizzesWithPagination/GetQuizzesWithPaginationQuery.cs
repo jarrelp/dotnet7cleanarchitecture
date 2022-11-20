@@ -28,9 +28,39 @@ public class GetQuizzesWithPaginationQueryHandler : IRequestHandler<GetQuizzesWi
 
     public async Task<PaginatedList<QuizDto>> Handle(GetQuizzesWithPaginationQuery request, CancellationToken cancellationToken)
     {
-        return await _context.Quizzes
-            .Where(x => x.Id == request.QuizId || x.Active == request.Active)
+        var ret = new PaginatedList<QuizDto>();
+        if (request.QuizId != null && request.Active != null)
+        {
+            ret = await _context.Quizzes
+            .Where(x => x.Id == request.QuizId && x.Active == request.Active)
+            .OrderBy(x => x.Description)
             .ProjectTo<QuizDto>(_mapper.ConfigurationProvider)
             .PaginatedListAsync(request.PageNumber, request.PageSize);
+        }
+        else if (request.QuizId != null && request.Active == null)
+        {
+            ret = await _context.Quizzes
+            .Where(x => x.Id == request.QuizId)
+            .OrderBy(x => x.Description)
+            .ProjectTo<QuizDto>(_mapper.ConfigurationProvider)
+            .PaginatedListAsync(request.PageNumber, request.PageSize);
+        }
+        else if (request.QuizId == null && request.Active != null)
+        {
+            ret = await _context.Quizzes
+            .Where(x => x.Active == request.Active)
+            .OrderBy(x => x.Description)
+            .ProjectTo<QuizDto>(_mapper.ConfigurationProvider)
+            .PaginatedListAsync(request.PageNumber, request.PageSize);
+        }
+        else
+        {
+            ret = await _context.Quizzes
+            .OrderBy(x => x.Description)
+            .ProjectTo<QuizDto>(_mapper.ConfigurationProvider)
+            .PaginatedListAsync(request.PageNumber, request.PageSize);
+        }
+
+        return ret;
     }
 }

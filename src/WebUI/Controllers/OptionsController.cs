@@ -19,7 +19,7 @@ public class OptionsController : ApiControllerBase
         return await Mediator.Send(query);
     }
 
-    [HttpGet]
+    [HttpGet("details")]
     public async Task<ActionResult<PaginatedList<OptionDetailDto>>> GetOptionDetailsWithPagination([FromQuery] GetOptionDetailsWithPaginationQuery query)
     {
         return await Mediator.Send(query);

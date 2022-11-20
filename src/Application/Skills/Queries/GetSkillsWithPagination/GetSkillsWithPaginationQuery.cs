@@ -27,10 +27,17 @@ public class GetSkillsWithPaginationQueryHandler : IRequestHandler<GetSkillsWith
 
     public async Task<PaginatedList<SkillDto>> Handle(GetSkillsWithPaginationQuery request, CancellationToken cancellationToken)
     {
-        return await _context.Skills
+        var ret = new PaginatedList<SkillDto>();
+        ret = request.SkillId == null
+            ? await _context.Skills
+            .OrderBy(x => x.Name)
+            .ProjectTo<SkillDto>(_mapper.ConfigurationProvider)
+            .PaginatedListAsync(request.PageNumber, request.PageSize)
+            : await _context.Skills
             .Where(x => x.Id == request.SkillId)
-            .OrderBy(x => x.Id)
+            .OrderBy(x => x.Name)
             .ProjectTo<SkillDto>(_mapper.ConfigurationProvider)
             .PaginatedListAsync(request.PageNumber, request.PageSize);
+        return ret;
     }
 }

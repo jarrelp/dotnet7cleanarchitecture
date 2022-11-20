@@ -3,7 +3,7 @@ using CleanArchitecture.Domain.Entities;
 
 namespace CleanArchitecture.Application.Common.Models;
 
-public class SkillDto : IMapFrom<Option>
+public class SkillDto : IMapFrom<Skill>
 {
     public int Id { get; set; }
 

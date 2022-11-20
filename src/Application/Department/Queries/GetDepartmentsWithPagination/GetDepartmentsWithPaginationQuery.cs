@@ -27,10 +27,17 @@ public class GetDepartmentsWithPaginationQueryHandler : IRequestHandler<GetDepar
 
     public async Task<PaginatedList<DepartmentDto>> Handle(GetDepartmentsWithPaginationQuery request, CancellationToken cancellationToken)
     {
-        return await _context.Departments
+        var ret = new PaginatedList<DepartmentDto>();
+        ret = request.DepartmentId == null
+            ? await _context.Departments
+            .OrderBy(x => x.Name)
+            .ProjectTo<DepartmentDto>(_mapper.ConfigurationProvider)
+            .PaginatedListAsync(request.PageNumber, request.PageSize)
+            : await _context.Departments
             .Where(x => x.Id == request.DepartmentId)
             .OrderBy(x => x.Name)
             .ProjectTo<DepartmentDto>(_mapper.ConfigurationProvider)
             .PaginatedListAsync(request.PageNumber, request.PageSize);
+        return ret;
     }
 }

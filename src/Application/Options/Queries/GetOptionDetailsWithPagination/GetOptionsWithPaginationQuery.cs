@@ -28,10 +28,39 @@ public class GetOptionDetailsWithPaginationQueryHandler : IRequestHandler<GetOpt
 
     public async Task<PaginatedList<OptionDetailDto>> Handle(GetOptionDetailsWithPaginationQuery request, CancellationToken cancellationToken)
     {
-        return await _context.Options
-            .Where(x => x.Id == request.OptionId || x.QuestionId == request.QuestionId)
+        var ret = new PaginatedList<OptionDetailDto>();
+        if (request.OptionId != null && request.QuestionId != null)
+        {
+            ret = await _context.Options
+            .Where(x => x.Id == request.OptionId && x.QuestionId == request.QuestionId)
             .OrderBy(x => x.Description)
             .ProjectTo<OptionDetailDto>(_mapper.ConfigurationProvider)
             .PaginatedListAsync(request.PageNumber, request.PageSize);
+        }
+        else if (request.OptionId != null && request.QuestionId == null)
+        {
+            ret = await _context.Options
+            .Where(x => x.Id == request.OptionId)
+            .OrderBy(x => x.Description)
+            .ProjectTo<OptionDetailDto>(_mapper.ConfigurationProvider)
+            .PaginatedListAsync(request.PageNumber, request.PageSize);
+        }
+        else if (request.OptionId == null && request.QuestionId != null)
+        {
+            ret = await _context.Options
+            .Where(x => x.QuestionId == request.QuestionId)
+            .OrderBy(x => x.Description)
+            .ProjectTo<OptionDetailDto>(_mapper.ConfigurationProvider)
+            .PaginatedListAsync(request.PageNumber, request.PageSize);
+        }
+        else
+        {
+            ret = await _context.Options
+            .OrderBy(x => x.Description)
+            .ProjectTo<OptionDetailDto>(_mapper.ConfigurationProvider)
+            .PaginatedListAsync(request.PageNumber, request.PageSize);
+        }
+
+        return ret;
     }
 }
