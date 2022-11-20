@@ -23,6 +23,6 @@ public static class CustomValidators
 
     public static IRuleBuilderOptions<T, string> NotNullOrEmpty<T>(this IRuleBuilder<T, string> ruleBuilder)
     {
-        return ruleBuilder.Must(m => string.IsNullOrEmpty(m)).WithMessage("'{PropertyName}' should not end with whitespace");
+        return ruleBuilder.Must(m => !string.IsNullOrEmpty(m)).WithMessage("'{PropertyName}' should not be null or empty");
     }
 }
