@@ -132,11 +132,16 @@ public class ApplicationDbContextInitialiser
             _context.Options.AddRange(o1, o2, o3);
 
             //question
-            _context.Questions.Add(new Question
-            {
-                Description = "Question",
-                Options = options
-            });
+            var question1 = new Question { Description = "Question", Options = options };
+            _context.Questions.Add(question1);
+
+            //quiz
+            var quiz1 = new Quiz { Description = "Question", Active = true, Questions = new List<Question>() { question1 } };
+            _context.Quizzes.Add(quiz1);
+
+            //result
+            var result1 = new Result { ApplicationUser = administrator, Options = new List<Option>() { o1 }, Quiz = quiz1 };
+            _context.Results.Add(result1);
 
             await _context.SaveChangesAsync();
         }

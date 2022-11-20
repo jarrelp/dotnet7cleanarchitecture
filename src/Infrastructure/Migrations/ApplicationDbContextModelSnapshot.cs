@@ -185,10 +185,10 @@ namespace CleanArchitecture.Infrastructure.Migrations
                     b.Property<int>("OptionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Priority")
+                    b.Property<int>("SkillId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SkillId")
+                    b.Property<int>("SkillLevel")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -253,6 +253,7 @@ namespace CleanArchitecture.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastModified")
@@ -275,6 +276,7 @@ namespace CleanArchitecture.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ApplicationUserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("Created")
@@ -290,9 +292,6 @@ namespace CleanArchitecture.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("QuizId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ResultId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -672,7 +671,9 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 {
                     b.HasOne("CleanArchitecture.Domain.Entities.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CleanArchitecture.Domain.Entities.Quiz", "Quiz")
                         .WithMany()
