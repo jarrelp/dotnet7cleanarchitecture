@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "CleanArchitecture.WebUI": {
+    "CleanArchitecture.API": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

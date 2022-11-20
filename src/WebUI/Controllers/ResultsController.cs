@@ -6,7 +6,7 @@ using CleanArchitecture.Application.Results.Queries.GetResultsWithPagination;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CleanArchitecture.WebUI.Controllers;
+namespace CleanArchitecture.API.Controllers;
 
 //[Authorize]
 public class ResultsController : ApiControllerBase

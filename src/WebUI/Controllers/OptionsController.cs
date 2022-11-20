@@ -8,7 +8,7 @@ using CleanArchitecture.Application.Options.Queries.GetOptionsWithPagination;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CleanArchitecture.WebUI.Controllers;
+namespace CleanArchitecture.API.Controllers;
 
 //[Authorize]
 public class OptionsController : ApiControllerBase

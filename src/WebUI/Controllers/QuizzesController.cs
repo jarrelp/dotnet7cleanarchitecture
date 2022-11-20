@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using CleanArchitecture.Application.Common.Models;
 
-namespace CleanArchitecture.WebUI.Controllers;
+namespace CleanArchitecture.API.Controllers;
 
 //[Authorize]
 public class QuizzesController : ApiControllerBase

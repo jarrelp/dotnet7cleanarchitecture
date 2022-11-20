@@ -7,7 +7,7 @@ using CleanArchitecture.Application.Departments.Commands.PurgeDepartments;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CleanArchitecture.WebUI.Controllers;
+namespace CleanArchitecture.API.Controllers;
 
 //[Authorize]
 public class DepartmentsController : ApiControllerBase

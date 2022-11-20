@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using CleanArchitecture.Application.SkillLevels.Queries.GetSkillLevels;
 using CleanArchitecture.Application.Common.Models;
 
-namespace CleanArchitecture.WebUI.Controllers;
+namespace CleanArchitecture.API.Controllers;
 
 //[Authorize]
 public class QuestionsController : ApiControllerBase
