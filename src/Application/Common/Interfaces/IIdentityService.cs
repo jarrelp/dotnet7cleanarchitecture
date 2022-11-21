@@ -18,4 +18,6 @@ public interface IIdentityService
     Task<List<Domain.Entities.Result>> GetUserResults(string userId);
 
     Task<ApplicationUser> GetUserAsync(string userId);
+
+    Task<List<ApplicationUser>> GetAllUsersAsync();
 }

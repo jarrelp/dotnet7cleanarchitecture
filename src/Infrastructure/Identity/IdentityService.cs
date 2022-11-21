@@ -37,6 +37,13 @@ public class IdentityService : IIdentityService
         return user;
     }
 
+    public async Task<List<ApplicationUser>> GetAllUsersAsync()
+    {
+        var user = _userManager.Users.ToList();
+
+        return user ?? new List<ApplicationUser>();
+    }
+
     public async Task<List<Domain.Entities.Result>> GetUserResults(string userId)
     {
         var user = await _userManager.Users.FirstAsync(u => u.Id == userId);
