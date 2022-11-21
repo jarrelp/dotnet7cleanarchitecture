@@ -30,6 +30,25 @@ public class IdentityService : IIdentityService
         return user.UserName;
     }
 
+    public async Task<ApplicationUser> GetUserAsync(string userId)
+    {
+        var user = await _userManager.Users.FirstAsync(u => u.Id == userId);
+
+        return user;
+    }
+
+    public async Task<List<Domain.Entities.Result>> GetUserResults(string userId)
+    {
+        var user = await _userManager.Users.FirstAsync(u => u.Id == userId);
+
+        var ret = new List<Domain.Entities.Result>();
+        foreach(var item in user.Results)
+        {
+            ret.Add(item);
+        }
+        return ret;
+    }
+
     public async Task<(Application.Common.Models.Result Result, string UserId)> CreateUserAsync(string userName, string password, int departmentId)
     {
         var user = new ApplicationUser

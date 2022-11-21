@@ -1,4 +1,5 @@
 ﻿using CleanArchitecture.Application.Common.Models;
+using CleanArchitecture.Domain.Entities;
 
 namespace CleanArchitecture.Application.Common.Interfaces;
 
@@ -10,7 +11,11 @@ public interface IIdentityService
 
     Task<bool> AuthorizeAsync(string userId, string policyName);
 
-    Task<(Result Result, string UserId)> CreateUserAsync(string userName, string password, int departmentId);
+    Task<(Models.Result Result, string UserId)> CreateUserAsync(string userName, string password, int departmentId);
 
-    Task<Result> DeleteUserAsync(string userId);
+    Task<Models.Result> DeleteUserAsync(string userId);
+
+    Task<List<Domain.Entities.Result>> GetUserResults(string userId);
+
+    Task<ApplicationUser> GetUserAsync(string userId);
 }
