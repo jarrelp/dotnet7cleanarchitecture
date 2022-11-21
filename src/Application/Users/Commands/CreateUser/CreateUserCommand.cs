@@ -17,14 +17,10 @@ public record CreateUserCommand : IRequest<string>
 public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, string>
 {
     private readonly IIdentityService _identityService;
-    private readonly IApplicationDbContext _context;
 
-    public CreateUserCommandHandler(IIdentityService identityService,
-        IApplicationDbContext context
-        )
+    public CreateUserCommandHandler(IIdentityService identityService)
     {
         _identityService = identityService;
-        _context = context;
     }
 
     public async Task<string> Handle(CreateUserCommand request, CancellationToken cancellationToken)

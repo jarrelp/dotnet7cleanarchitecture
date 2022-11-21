@@ -19,16 +19,14 @@ public record GetUsersWithPaginationQuery : IRequest<PaginatedList<ApplicationUs
 public class GetUsersWithPaginationQueryHandler : IRequestHandler<GetUsersWithPaginationQuery, PaginatedList<ApplicationUserDto>>
 {
     private readonly IIdentityService _identityService;
-    private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
     public GetUsersWithPaginationQueryHandler(
         IIdentityService identityService,
-        IApplicationDbContext context, IMapper mapper
+        IMapper mapper
         )
     {
         _identityService = identityService;
-        _context = context;
         _mapper = mapper;
     }
 

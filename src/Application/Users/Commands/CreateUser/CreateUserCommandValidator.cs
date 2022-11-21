@@ -7,7 +7,7 @@ namespace CleanArchitecture.Application.Users.Commands.CreateUser;
 
 public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
 {
-    private readonly IApplicationDbContext _context;
+    /*private readonly IApplicationDbContext _context;
 
     public CreateUserCommandValidator(IApplicationDbContext context)
     {
@@ -25,5 +25,5 @@ public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
     {
         return await _context.Users
             .AllAsync(l => l.Name != name, cancellationToken);
-    }
+    }*/
 }
