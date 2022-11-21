@@ -11,7 +11,7 @@ public record CreateResultCommand : IRequest<int>
 
     public string ApplicationUserId { get; set; } = null!;
 
-    public IList<Option> Options { get; init; } = null!;
+    public IList<int> AnswerIds { get; init; } = new List<int>();
 }
 
 public class CreateResultCommandHandler : IRequestHandler<CreateResultCommand, int>
@@ -25,11 +25,17 @@ public class CreateResultCommandHandler : IRequestHandler<CreateResultCommand, i
 
     public async Task<int> Handle(CreateResultCommand request, CancellationToken cancellationToken)
     {
+        var answers = new List<Option>();
+        foreach(var item in request.AnswerIds)
+        {
+            answers.Add(_context.Options.Where(x => x.Id == item).First());
+        }
+
         var entity = new Result
         {
             QuizId = request.QuizId,
             ApplicationUserId = request.ApplicationUserId,
-            Options = request.Options
+            Answers = answers
         };
 
         entity.AddDomainEvent(new ResultCreatedEvent(entity));

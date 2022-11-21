@@ -3,7 +3,7 @@ using CleanArchitecture.Domain.Entities;
 
 namespace CleanArchitecture.Application.Common.Models;
 
-public class ApplicationUserDto : IMapFrom<Quiz>
+public class ApplicationUserDto : IMapFrom<ApplicationUser>
 {
     public ApplicationUserDto()
     {

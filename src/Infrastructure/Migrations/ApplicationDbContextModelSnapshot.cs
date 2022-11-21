@@ -670,7 +670,7 @@ namespace CleanArchitecture.Infrastructure.Migrations
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.Result", b =>
                 {
                     b.HasOne("CleanArchitecture.Domain.Entities.ApplicationUser", "ApplicationUser")
-                        .WithMany()
+                        .WithMany("Results")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -735,6 +735,11 @@ namespace CleanArchitecture.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("CleanArchitecture.Domain.Entities.ApplicationUser", b =>
+                {
+                    b.Navigation("Results");
                 });
 
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.Option", b =>

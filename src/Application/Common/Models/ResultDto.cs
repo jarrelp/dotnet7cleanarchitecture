@@ -1,13 +1,12 @@
 ﻿using CleanArchitecture.Application.Common.Mappings;
-using CleanArchitecture.Domain.Entities;
 
 namespace CleanArchitecture.Application.Common.Models;
 
-public class ResultDto : IMapFrom<Result>
+public class ResultDto : IMapFrom<Domain.Entities.Result>
 {
     public ResultDto()
     {
-        Options = new List<OptionDto>();
+        Answers = new List<OptionDto>();
     }
 
     public int Id { get; set; }
@@ -16,5 +15,5 @@ public class ResultDto : IMapFrom<Result>
 
     public string ApplicationUserId { get; set; } = null!;
 
-    public IList<OptionDto> Options { get; set; }
+    public IList<OptionDto> Answers { get; set; }
 }

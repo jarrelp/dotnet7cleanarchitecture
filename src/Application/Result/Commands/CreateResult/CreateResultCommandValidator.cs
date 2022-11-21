@@ -18,15 +18,15 @@ public class CreateResultCommandValidator : AbstractValidator<CreateResultComman
         RuleFor(v => v.ApplicationUserId)
             .NotNull()
             .NotEmpty();
-        RuleFor(v => v.Options)
+        RuleFor(v => v.AnswerIds)
             .NotNull()
             .NotEmpty();
-        RuleFor(v => v).MustAsync(BeUniqueResultForEachPersonAndQuiz).WithMessage("The specified description already exists.");
+        /*RuleFor(v => v).MustAsync(BeUniqueResultForEachPersonAndQuiz).WithMessage("The specified description already exists.");*/
     }
 
-    public async Task<bool> BeUniqueResultForEachPersonAndQuiz(CreateResultCommand createResultCommand, CancellationToken cancellationToken)
+    /*public async Task<bool> BeUniqueResultForEachPersonAndQuiz(CreateResultCommand createResultCommand, CancellationToken cancellationToken)
     {
         return await _context.Results
             .AllAsync(l => l.QuizId != createResultCommand.QuizId && l.ApplicationUserId != createResultCommand.ApplicationUserId, cancellationToken);
-    }
+    }*/
 }

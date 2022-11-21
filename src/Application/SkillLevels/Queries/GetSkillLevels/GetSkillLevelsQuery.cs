@@ -22,11 +22,11 @@ public class GetSkillLevelsQueryHandler : IRequestHandler<GetSkillLevelsQuery, L
         _mapper = mapper;
     }
 
-    public async Task<List<SkillLevelDto>> Handle(GetSkillLevelsQuery request, CancellationToken cancellationToken)
+    public Task<List<SkillLevelDto>> Handle(GetSkillLevelsQuery request, CancellationToken cancellationToken)
     {
-        return Enum.GetValues(typeof(SkillLevel))
+        return Task.FromResult(Enum.GetValues(typeof(SkillLevel))
                 .Cast<SkillLevel>()
                 .Select(p => new SkillLevelDto { Value = (int)p, Name = p.ToString() })
-                .ToList();
+                .ToList());
     }
 }

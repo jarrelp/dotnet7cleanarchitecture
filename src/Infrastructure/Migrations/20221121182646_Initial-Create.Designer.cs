@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CleanArchitecture.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221120010310_Initial-Create")]
+    [Migration("20221121182646_Initial-Create")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -673,7 +673,7 @@ namespace CleanArchitecture.Infrastructure.Migrations
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.Result", b =>
                 {
                     b.HasOne("CleanArchitecture.Domain.Entities.ApplicationUser", "ApplicationUser")
-                        .WithMany()
+                        .WithMany("Results")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -738,6 +738,11 @@ namespace CleanArchitecture.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("CleanArchitecture.Domain.Entities.ApplicationUser", b =>
+                {
+                    b.Navigation("Results");
                 });
 
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.Option", b =>

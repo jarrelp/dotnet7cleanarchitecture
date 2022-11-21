@@ -74,7 +74,7 @@ public class ApplicationDbContextInitialiser
         if (_userManager.Users.All(u => u.UserName != administrator.UserName))
         {
             await _userManager.CreateAsync(administrator, "Admin1!");
-            await _userManager.AddToRolesAsync(administrator, new [] { administratorRole.Name });
+            await _userManager.AddToRolesAsync(administrator, new List<string>() { administratorRole.Name });
         }
 
         // Default data
@@ -140,7 +140,7 @@ public class ApplicationDbContextInitialiser
             _context.Quizzes.Add(quiz1);
 
             //result
-            var result1 = new Result { ApplicationUser = administrator, Options = new List<Option>() { o1 }, Quiz = quiz1 };
+            var result1 = new Result { ApplicationUser = administrator, Answers = new List<Option>() { o1 }, Quiz = quiz1 };
             _context.Results.Add(result1);
 
             await _context.SaveChangesAsync();

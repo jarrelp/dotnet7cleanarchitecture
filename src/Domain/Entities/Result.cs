@@ -8,11 +8,5 @@ public class Result : BaseAuditableEntity
     public string ApplicationUserId { get; set; } = null!;
     public ApplicationUser ApplicationUser { get; set; } = null!;
 
-    public IList<Option> Options { get; set; } = new List<Option>();
+    public IList<Option> Answers { get; set; } = new List<Option>();
 }
-
-/***
- * Result wordt per quiz per user opgeslagen in database
- * 
- * 
- * **/

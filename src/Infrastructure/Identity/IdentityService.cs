@@ -39,9 +39,12 @@ public class IdentityService : IIdentityService
 
     public async Task<List<ApplicationUser>> GetAllUsersAsync()
     {
-        var user = _userManager.Users.ToList();
+        var users = await _userManager.Users.ToListAsync();
 
-        return user ?? new List<ApplicationUser>();
+        List<ApplicationUser> ret = new List<ApplicationUser>();
+        ret.AddRange(users);
+
+        return ret;
     }
 
     public async Task<List<Domain.Entities.Result>> GetUserResults(string userId)

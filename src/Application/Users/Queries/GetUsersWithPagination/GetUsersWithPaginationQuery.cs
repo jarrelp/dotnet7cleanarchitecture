@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using CleanArchitecture.Application.Common.Interfaces;
 using CleanArchitecture.Application.Common.Mappings;
 using CleanArchitecture.Application.Common.Models;
+using CleanArchitecture.Domain.Entities;
 using MediatR;
 
 namespace CleanArchitecture.Application.Users.Queries.GetUsersWithPagination;
@@ -33,9 +34,12 @@ public class GetUsersWithPaginationQueryHandler : IRequestHandler<GetUsersWithPa
     public async Task<PaginatedList<ApplicationUserDto>> Handle(GetUsersWithPaginationQuery request, CancellationToken cancellationToken)
     {
         var ret = new PaginatedList<ApplicationUserDto>();
-        if (request.UserId == null && request.UserName == null && request.DepartmentId == null)
+        var results = _identityService.GetAllUsersAsync().Result.ToList();
+        ret.Items.AddRange((IEnumerable<ApplicationUserDto>)results);
+
+        /*if (request.UserId == null && request.UserName == null && request.DepartmentId == null)
         {
-            ret = await _identityService.GetAllUsersAsync().Result.AsQueryable()
+            ret = await _identityService.GetAllUsersAsync().ToList()
             .Where(x => x.Id == request.UserId && x.UserName == request.UserName && x.DepartmentId == request.DepartmentId)
             .OrderBy(x => x.UserName)
             .ProjectTo<ApplicationUserDto>(_mapper.ConfigurationProvider)
@@ -95,7 +99,8 @@ public class GetUsersWithPaginationQueryHandler : IRequestHandler<GetUsersWithPa
             .OrderBy(x => x.UserName)
             .ProjectTo<ApplicationUserDto>(_mapper.ConfigurationProvider)
             .PaginatedListAsync(request.PageNumber, request.PageSize);
-        }
-        return ret;
+        }*/
+
+        return await Task.FromResult(ret);
     }
 }

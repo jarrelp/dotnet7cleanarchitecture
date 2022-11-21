@@ -30,9 +30,8 @@ public class GetResultsWithPaginationQueryHandler : IRequestHandler<GetResultsWi
     public async Task<PaginatedList<ResultDto>> Handle(GetResultsWithPaginationQuery request, CancellationToken cancellationToken)
     {
         return await _context.Results
-            .Where(x => x.Id == request.ResultId || x.ApplicationUserId == request.ApplicationUserId || x.QuizId == request.QuizId)
+            /*.Where(x => x.Id == request.ResultId || x.ApplicationUserId == request.ApplicationUserId || x.QuizId == request.QuizId)*/
             .OrderBy(x => x.Id)
-            .Select(x => x.Options)
             .ProjectTo<ResultDto>(_mapper.ConfigurationProvider)
             .PaginatedListAsync(request.PageNumber, request.PageSize);
     }
